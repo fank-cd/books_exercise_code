@@ -2,8 +2,10 @@
 from atexit import register
 from re import compile
 from threading import Thread
-from time import  ctime
+from time import ctime
 from urllib2 import urlopen as uopen
+
+# 这段代码一直503错误，应该是亚马逊做了其他反爬策略，这里就学习代码好了
 
 REGEX = compile('#([\d,]+) in Books ')
 AMZN = 'http://amazon.com/dp/'
@@ -26,7 +28,7 @@ def showRanking(isbn):
     print("- %r ranked %s" % (ISBNs[isbn], getRanking(isbn)))
 
 
-def main():
+def _main():
     print("AT", ctime(), "on Amazon...")
     for isbn in ISBNs:
         showRanking(isbn)
