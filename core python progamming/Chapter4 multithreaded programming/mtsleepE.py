@@ -38,7 +38,7 @@ def main():
     for i in nloops:
         threads[i].join()
 
-    print("ALL DONE at:",ctime())
+    print("ALL DONE at:", ctime())
 
 if __name__ == '__main__':
     main()
