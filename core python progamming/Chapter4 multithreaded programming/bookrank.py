@@ -24,19 +24,19 @@ def getRanking(isbn):
     return REGEX.findall(data)[0]
 
 
-def showRanking(isbn):
+def _showRanking(isbn):
     print("- %r ranked %s" % (ISBNs[isbn], getRanking(isbn)))
 
 
 def _main():
     print("AT", ctime(), "on Amazon...")
     for isbn in ISBNs:
-        showRanking(isbn)
+       _showRanking(isbn)
 
 @register
 def atexit():
     print("All Done at", ctime())
 
 if __name__ == '__main__':
-    main()
+    _main()
 
