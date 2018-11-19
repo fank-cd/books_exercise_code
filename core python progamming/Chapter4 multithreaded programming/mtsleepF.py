@@ -17,7 +17,6 @@ remaining = CleanOutputSet()
 
 def loop(nesc):
     myname = currentThread().name
-
     lock.acquire()
     remaining.add(myname)
     print('[%s] Started %s' % (ctime(), myname))
