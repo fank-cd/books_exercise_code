@@ -6,26 +6,26 @@ from myThread import MyThread
 
 
 def writeQ(queue):
-    print("producing object for Q")
-    queue.put("xxx",1)
-    print("size now", queue.qsize())
+    print "producing object for Q",
+    queue.put("xxx", 1)
+    print "size now", queue.qsize()
 
 
 def readQ(queue):
     val = queue.get(1)
-    print("consumed object from Q ... size now", queue.qsize())
+    print "consumed object from Q ... size now", queue.qsize()
 
 
-def writer(queue,loops):
+def writer(queue, loops):
     for i in range(loops):
         writeQ(queue)
-        sleep(randint(1,3))
+        sleep(randint(1, 3))
 
 
-def reader(queue,loops):
+def reader(queue, loops):
     for i in range(loops):
         readQ(queue)
-        sleep(randint(2,5))
+        sleep(randint(2, 5))
 
 
 funcs = [writer, reader]
@@ -48,6 +48,7 @@ def main():
         threads[i].join()
 
     print "ALL DONE"
+
 
 if __name__ == '__main__':
     main()
