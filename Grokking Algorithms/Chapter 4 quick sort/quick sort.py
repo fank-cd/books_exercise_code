@@ -1,5 +1,7 @@
 # coding:utf-8
 
+# 基准值的选择非常影响快排的效率
+
 def quicksort(array):
     if len(array) < 2:
         return array
