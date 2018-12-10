@@ -1,21 +1,38 @@
 # -*- coding: utf-8 -*-
+
 import urlparse
 from socket import gethostname
 from datetime import datetime
 
-import scrapy
+
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders import CrawlSpider, Rule
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import MapCompose, Join
 
 from properties.items import PropertiesItem
 
 
-class BasicSpider(scrapy.Spider):
-    name = 'basic'
+class EasySpider(CrawlSpider):
+    name = 'easy'
     allowed_domains = ['localhost']
-    start_urls = ['http://localhost:9312/properties/property_000000.html']
+    start_urls = ['http://localhost:9312/properties/index_00000.html']
 
-    def parse(self, response):
+    rules = (
+        # Rule(LinkExtractor(allow=r'Items/'), callback='parse_item', follow=True),
+        Rule(LinkExtractor(restrict_xpaths='//*[contains(@class,"next")]')),
+        Rule(LinkExtractor(restrict_xpaths='//*[@itemprop="url"]'), callback='parse_item')
+    )
+
+    def parse_item(self, response):
+        i = {}
+        #i['domain_id'] = response.xpath('//input[@id="sid"]/@value').extract()
+        #i['name'] = response.xpath('//div[@id="name"]').extract()
+        #i['description'] = response.xpath('//div[@id="description"]').extract()
+        return i
+
+
+    def parse_item(self, response):
         """
         @url http://localhost:9312/properties/property_000001.html
         @returns items 1
