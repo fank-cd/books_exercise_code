@@ -14,23 +14,15 @@ from properties.items import PropertiesItem
 
 
 class EasySpider(CrawlSpider):
-    name = 'easy'
-    allowed_domains = ['localhost']
-    start_urls = ['http://localhost:9312/properties/index_00000.html']
+    name = 'tomobile'
+    allowed_domains = ['scrapybook.s3.amazonaws.com']
+    start_urls = ['http://scrapybook.s3.amazonaws.com/properties/index_00000.html']
 
     rules = (
         # Rule(LinkExtractor(allow=r'Items/'), callback='parse_item', follow=True),
         Rule(LinkExtractor(restrict_xpaths='//*[contains(@class,"next")]')),
         Rule(LinkExtractor(restrict_xpaths='//*[@itemprop="url"]'), callback='parse_item')
     )
-
-    def parse_item(self, response):
-        i = {}
-        #i['domain_id'] = response.xpath('//input[@id="sid"]/@value').extract()
-        #i['name'] = response.xpath('//div[@id="name"]').extract()
-        #i['description'] = response.xpath('//div[@id="description"]').extract()
-        return i
-
 
     def parse_item(self, response):
         """
