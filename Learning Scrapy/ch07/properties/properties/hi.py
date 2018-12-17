@@ -6,3 +6,4 @@ class Command(ScrapyCommand):
 
     def run(self, args, opts):
         print("hello")
+
