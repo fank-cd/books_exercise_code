@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+import datetime
 import scrapy
 import re
 from scrapy.http import Request
 from urllib import parse
 
 from ArtileSpider.items import JobBoleAritleItem
+from ArtileSpider.utils.common import get_md5
+
 
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
@@ -62,8 +65,15 @@ class JobboleSpider(scrapy.Spider):
 
         artile_item["title"] = title
         artile_item["url"] = response.url
+
+        try:
+            create_date = datetime.datetime.strptime(create_date, "%Y%m%d").date()
+        except:
+            create_date = datetime.datetime.now().date()
+
         artile_item["create_date"] = create_date
         artile_item["front_image_url"] = [front_image_url]
+        artile_item["url_object_id"] = get_md5(response.url)
 
         artile_item["praise_nums"] = praise_nums
         artile_item["comment_nums"] = comment_nums
