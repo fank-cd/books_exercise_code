@@ -69,7 +69,7 @@ class JobboleSpider(scrapy.Spider):
         artile_item["comment_nums"] = comment_nums
         artile_item["fav_nums"] = fav_nums
         artile_item["tags"] = tags
-        # artile_item["content"] = content
+        artile_item["content"] = content
 
         yield artile_item
         # pass
