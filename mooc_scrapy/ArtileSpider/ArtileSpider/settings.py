@@ -67,13 +67,15 @@ ROBOTSTXT_OBEY = False
 
 ITEM_PIPELINES = {
     'ArtileSpider.pipelines.ArtilespiderPipeline': 300,
-    'scrapy.pipelines.images.ImagesPipeline': 1,
+    'scrapy.pipelines.images.ImagesPipeline': 300,
 }
+# 数字为优先级
+
 
 IMAGES_URLS_FIELD = "front_image_url"
 project_dir = os.path.abspath(os.path.dirname(__file__))
+
 IMAGES_STORE = os.path.join(project_dir, "images")
-# 数字为优先级
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
