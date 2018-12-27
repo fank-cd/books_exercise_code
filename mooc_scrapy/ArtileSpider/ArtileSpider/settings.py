@@ -66,9 +66,13 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 ITEM_PIPELINES = {
-    'ArtileSpider.pipelines.JsonExporterPipleline': 2,
-   # 'scrapy.pipelines.images.ImagesPipeline': 300,
-    'ArtileSpider.pipelines.ArticleImagePipeline': 1,
+    # 'ArtileSpider.pipelines.JsonExporterPipleline': 2,
+    # 'scrapy.pipelines.images.ImagesPipeline': 300,
+    # 'ArtileSpider.pipelines.ArticleImagePipeline': 1,
+    # 'ArtileSpider.pipelines.MysqlPipeline': 1,
+    'ArtileSpider.pipelines.MysqlTwistedPipline': 1,
+
+
 }
 # 数字为优先级
 
@@ -101,3 +105,8 @@ IMAGES_STORE = os.path.join(project_dir, "images")
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+MYSQL_HOST = "127.0.0.1"
+MYSQL_DBNAME = "article_spider"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "1234"
