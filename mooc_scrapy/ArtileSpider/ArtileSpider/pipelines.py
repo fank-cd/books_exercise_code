@@ -69,8 +69,6 @@ class MysqlTwistedPipline(object):
         cursor.execute(insert_sql, (item['title'], item['url'], item['create_date'], item['fav_nums']))
 
 
-
-
 class JsonExporterPipleline(object):
     def __init__(self):
         self.file = open("articleexport.json", 'wb')
@@ -98,11 +96,13 @@ class JsonWithEncodingPipeline(object):
     def spider_closed(self, spider):
         self.file.close()
 """
+
+
 class ArticleImagePipeline(ImagesPipeline):
     def item_completed(self, results, item, info):
-        for ok, value in results:
-            image_file_path = value["path"]
-        item["front_image_path"] = image_file_path
-
-        return item
-        # pass
+        if "front_image_url" in item:
+            for ok, value in results:
+                image_file_path = value["path"]
+            item["front_image_path"] = image_file_path
+            return item
+            # pass
