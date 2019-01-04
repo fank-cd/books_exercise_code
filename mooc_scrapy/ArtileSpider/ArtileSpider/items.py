@@ -77,6 +77,19 @@ class JobBoleAritleItem(scrapy.Item):
     )
     content = scrapy.Field()
 
+    def get_insert_sql(self):
+        insert_sql = """
+            insert into jobbole_article(title, url, create_date, fav_nums)
+            VALUES (%s, %s, %s, %s)
+        """
+
+        zhihu_id = int("".join(self["zhihu_id"]))
+        topics = ",".join(self["topics"])
+        url = "".join(self["url"])
+        title = "".join(self["title"])
+        content = "".join(self["zhihu_id"])
+
+
 
 class ZhihuQUestionItem(scrapy.Item):
     # 知乎的问题item
@@ -91,6 +104,18 @@ class ZhihuQUestionItem(scrapy.Item):
     watch_user_num = scrapy.Field()
     click_num = scrapy.Field()
     crawl_time = scrapy.Field()
+
+    def get_insert_sql(self):
+        insert_sql = """
+            insert into zhihu_question(zhihu_id, topics, url, title,content, answer_num, comments_num,
+            watch_user_num, click_num, crawl_time
+            )
+            VALUES (%s, %s, %s, %s, %s,%s,%s,%s,%s,%s)
+        """
+
+        params = (self['title'], self['url'], self['create_date'], self['fav_nums'])
+
+        return insert_sql, params
 
 
 class ZhihuAnswerItem(scrapy.Item):

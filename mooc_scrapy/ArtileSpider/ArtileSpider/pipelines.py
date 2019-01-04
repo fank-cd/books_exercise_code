@@ -62,11 +62,13 @@ class MysqlTwistedPipline(object):
 
     def do_insert(self, cursor, item):
         # 执行具体的插入
-        insert_sql = """
-            insert into jobbole_article(title, url, create_date, fav_nums)
-            VALUES (%s, %s, %s, %s)
-        """
-        cursor.execute(insert_sql, (item['title'], item['url'], item['create_date'], item['fav_nums']))
+        # 根据不同的item 构建不同的sql语句并插入到mysql中
+
+        # item.__class__.__name__ = "JobBoleArtileItem"
+
+        insert_sql, params = item.get_insert_sql()
+
+        cursor.execute(insert_sql, params)
 
 
 class JsonExporterPipleline(object):
@@ -106,3 +108,5 @@ class ArticleImagePipeline(ImagesPipeline):
             item["front_image_path"] = image_file_path
             return item
             # pass
+
+
