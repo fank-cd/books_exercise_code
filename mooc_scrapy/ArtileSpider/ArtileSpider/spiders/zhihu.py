@@ -61,8 +61,8 @@ class ZhihuSpider(scrapy.Spider):
             item_loader = ItemLoader(item=ZhihuQUestionItem(), response=response)
 
             # item_loader.add_css("title", "h1.QuestionHeader-title h2 a::text")
-            item_loader.add_xpath("title", "//*[@class='zh-question-title']/h2/a/text()|"
-                                           " //*[@class='zh-question-title']/h2/span/text()")
+            item_loader.add_xpath("title", "//*[@id='zh-question-title']/h2/a/text()|"
+                                           " //*[@id='zh-question-title']/h2/span/text()")
             item_loader.add_css("content", ".QuestionHeader-detail")
             item_loader.add_value("url", response.url)
             item_loader.add_value("zhihu_id", question_id)
