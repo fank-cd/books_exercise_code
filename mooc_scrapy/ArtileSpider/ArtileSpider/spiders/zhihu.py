@@ -135,7 +135,7 @@ class ZhihuSpider(scrapy.Spider):
 
             )]
 
-    def check_login(self,response):
+    def check_login(self, response):
         # 验证服务器的返回数据判断是否成功
         text_json = json.loads(response.text)
 
