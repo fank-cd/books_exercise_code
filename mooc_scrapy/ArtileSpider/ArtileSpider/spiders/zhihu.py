@@ -6,6 +6,8 @@ import datetime
 from scrapy.loader import ItemLoader
 from ArtileSpider.items import ZhihuAnswerItem,ZhihuQUestionItem
 from urllib import parse
+# from ArtileSpider.settings import user_agent_list
+
 # python 2
 # import urlparse
 
@@ -23,6 +25,7 @@ class ZhihuSpider(scrapy.Spider):
                        "relationship.is_authorized,is_author,voting,is_thanked,is_nothelp,is_labeled;" \
                        "data[*].mark_infos[*].url;data[*].author.follower_count," \
                        "badge[*].topics&offset={1}&limit={2}&sort_by=default&platform=desktop"
+
 
     agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
     headers = {
@@ -43,6 +46,15 @@ class ZhihuSpider(scrapy.Spider):
             if match_obj:
                 request_url = match_obj.group(1)
                 question_id = match_obj.group(2)
+                """
+                import random
+                random_index = random.randint(0, len(user_agent_list) - 1)
+                random_agent = user_agent_list[random_index]
+                self.headers["User-Agent"] = random_agent
+                
+                agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
+                """
+
                 yield scrapy.Request(request_url, headers=self.headers, callback=self.parse_question)
             else:
                 # 如果不是question页面则检查该页面中有无url是question页面

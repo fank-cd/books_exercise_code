@@ -115,4 +115,14 @@ MYSQL_PASSWORD = "1234"
 SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 SQL_DATE_FORMAT = "%Y-%m-%d"
 
-USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
+RANDOM_UA_TYPE = "random"
+
+"""
+user_agent_list = [
+    "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11",
+
+]
+
+#  USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
+
+"""

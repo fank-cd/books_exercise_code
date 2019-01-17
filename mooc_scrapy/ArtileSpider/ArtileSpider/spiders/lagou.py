@@ -12,12 +12,7 @@ class LagouSpider(CrawlSpider):
     allowed_domains = ['www.lagou.com']
     start_urls = ['https://www.lagou.com/']
 
-    agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
-    headers = {
-        "HOST": "www.zhihu.com",
-        "Referer": "https://www.zhihu.com",
-        "User-Agent": agent
-    }
+
 
     rules = (
 
