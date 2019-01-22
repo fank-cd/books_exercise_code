@@ -8,6 +8,9 @@
 from scrapy import signals
 from fake_useragent import UserAgent
 # from ArtileSpider.settings import
+from ArtileSpider.tools.crawl_sici_ip import GetIP
+
+
 class ArtilespiderSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -103,10 +106,10 @@ class ArtilespiderDownloaderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class RandomUserAgentMiddlware(object):
+class RandomUserAgentMiddleware(object):
     # 随机更换user-agent
     def __init__(self, crawler):
-        super(RandomUserAgentMiddlware, self).__init__()
+        super(RandomUserAgentMiddleware, self).__init__()
         # self.user_agent_list = crawler.settings.get("user_agent_list",[])
         self.ua = UserAgent()
         self.ua_type = crawler.settings.get("RANDOM_UA_TYPE", "random")
@@ -115,8 +118,17 @@ class RandomUserAgentMiddlware(object):
     def from_crawler(cls, crawler):
         return cls(crawler)
 
-    def process_request(self, request,spider):
+    def process_request(self, request, spider):  # 处理request的函数
         def get_ua():
             return getattr(self.ua, self.ua_type)
         random_agent = get_ua()
         request.headers.setdefault("User-Agent", get_ua())
+
+        # request.meta["proxy"] = "http://119.101.116.182:9999"
+
+
+class RandomProxyMiddleware(object):
+    # 动态设置IP代理
+    def process_request(self, request, spider):  # 处理request的函数
+        get_ip = GetIP()
+        request.meta["proxy"] = get_ip.get_random_ip()
