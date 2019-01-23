@@ -132,3 +132,20 @@ class RandomProxyMiddleware(object):
     def process_request(self, request, spider):  # 处理request的函数
         get_ip = GetIP()
         request.meta["proxy"] = get_ip.get_random_ip()
+
+
+from selenium import webdriver
+from scrapy.http import HtmlResponse
+
+class JSPageMiddleware(object):
+    # 通过Firefox请求动态网页
+
+    def process_request(self, request, spider):
+        if spider.name == "jobbole":
+            #browser = webdriver.Firefox(executable_path="E:\\geckodriver.exe")
+            spider.browser.get(request.url)
+            import time
+            time.sleep(3)
+            print("访问:{0}".format(request.url))
+
+            return HtmlResponse(url=spider.browser.current_url, body=spider.browser.page_source, encoding="utf-8",request=request)

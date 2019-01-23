@@ -27,13 +27,15 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-#DOWNLOAD_DELAY = 3
+# 下载延迟限速 3即为3秒
+DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+# 禁用cookie可以防止被识别
+COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -54,7 +56,8 @@ ROBOTSTXT_OBEY = False
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     # 数字优先级
-    'ArtileSpider.middlewares.RandomUserAgentMiddleware': 543,
+    #'ArtileSpider.middlewares.RandomUserAgentMiddleware': 543,
+    "ArtileSpider.middlewares.JSPageMiddleware": 1,
     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
    # 'ArtileSpider.middlewares.ArtilespiderDownloaderMiddleware': 543,
 }
@@ -88,7 +91,7 @@ IMAGES_STORE = os.path.join(project_dir, "images")
 # IMAGES_MIN_HEIGHT = 100
 # IAMGES_MIN_WIDTH = 100
 
-# Enable and configure the AutoThrottle extension (disabled by default)
+# Enable and configure the  ttle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
 # The initial download delay

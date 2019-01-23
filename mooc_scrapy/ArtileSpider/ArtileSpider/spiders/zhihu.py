@@ -16,6 +16,10 @@ class ZhihuSpider(scrapy.Spider):
     name = 'zhihu'
     allowed_domains = ['www.zhihu.com']
     start_urls = ['http://www.zhihu.com/']
+    custom_settings = {
+        "COOKIES_ENABLED":True,
+    }
+
     # question的第一页answer的请求url
     start_answer_url = "https://www.zhihu.com/api/v4/questions/{0}/" \
                        "answers?include=data[*].is_normal,admin_closed_comment,reward_info,is_collapsed," \
