@@ -15,23 +15,33 @@ from scrapy import signals
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
     allowed_domains = ['blog.jobbole.com']
-    start_urls = ['http://blog.jobbole.com/all-posts/']
+    #start_urls = ['http://blog.jobbole.com/all-posts/']
+    start_urls = ['http://blog.jobbole.com/all-fankdddddd/']
+    #
+    # def __init__(self):
+    #     self.browser = webdriver.Firefox(executable_path="E:\\geckodriver.exe")
+    #     super(JobboleSpider, self).__init__()
+    #     dispatcher.connect(self.spider_closed,signals.spider_closed)
+    #
+    # def spider_closed(self, spider):
+    #     # 当爬虫退出的时候，关闭chorm
+    #     print("spider closed")
+    #     self.browser.quit()
+    handle_httpstatus_list = [404]
 
     def __init__(self):
-        self.browser = webdriver.Firefox(executable_path="E:\\geckodriver.exe")
-        super(JobboleSpider, self).__init__()
-        dispatcher.connect(self.spider_closed,signals.spider_closed)
-
-    def spider_closed(self, spider):
-        # 当爬虫退出的时候，关闭chorm
-        print("spider closed")
-        self.browser.quit()
+        # super(JobboleSpider, self).__init__()
+        self.fail_urls = []
 
     def parse(self, response):
         """
         :param response:
         :return:
         """
+        if response.status == 404:
+            self.fail_urls.append(response.url)
+            self.crawler.stats.inc_value("failed_url")
+
         # response.xpath("//div[@id='archive']//div[@class='post-thumb']/a/image/@href")
         post_nodes = response.xpath("//div[@id='archive']//div[@class='post-thumb']")
         # 提取文章详情页

@@ -54,13 +54,13 @@ COOKIES_ENABLED = False
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    # 数字优先级
-    #'ArtileSpider.middlewares.RandomUserAgentMiddleware': 543,
-    "ArtileSpider.middlewares.JSPageMiddleware": 1,
-    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-   # 'ArtileSpider.middlewares.ArtilespiderDownloaderMiddleware': 543,
-}
+# DOWNLOADER_MIDDLEWARES = {
+#     # 数字优先级
+#     #'ArtileSpider.middlewares.RandomUserAgentMiddleware': 543,
+#     "ArtileSpider.middlewares.JSPageMiddleware": 1,
+#     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+#    # 'ArtileSpider.middlewares.ArtilespiderDownloaderMiddleware': 543,
+# }
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
