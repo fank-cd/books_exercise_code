@@ -11,7 +11,7 @@ def search(lines,pattern,histroy=5):
 
 
 if __name__ == '__main__':
-    with open("somefile.txt") as f:
+    with open("./somefile.txt") as f:
         for line, prelines in search(f, "python", 5):
             for pline in prelines:
                 print(pline, end="")
