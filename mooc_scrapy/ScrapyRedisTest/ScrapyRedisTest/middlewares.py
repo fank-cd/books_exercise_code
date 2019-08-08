@@ -6,12 +6,9 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-from fake_useragent import UserAgent
-# from ArtileSpider.settings import
-from ArtileSpider.tools.crawl_sici_ip import GetIP
 
 
-class ArtilespiderSpiderMiddleware(object):
+class ScrapyredistestSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -59,7 +56,7 @@ class ArtilespiderSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class ArtilespiderDownloaderMiddleware(object):
+class ScrapyredistestDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
@@ -104,48 +101,3 @@ class ArtilespiderDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
-
-
-class RandomUserAgentMiddleware(object):
-    # 随机更换user-agent
-    def __init__(self, crawler):
-        super(RandomUserAgentMiddleware, self).__init__()
-        # self.user_agent_list = crawler.settings.get("user_agent_list",[])
-        self.ua = UserAgent()
-        self.ua_type = crawler.settings.get("RANDOM_UA_TYPE", "random")
-
-    @classmethod
-    def from_crawler(cls, crawler):
-        return cls(crawler)
-
-    def process_request(self, request, spider):  # 处理request的函数
-        def get_ua():
-            return getattr(self.ua, self.ua_type)
-        random_agent = get_ua()
-        request.headers.setdefault("User-Agent", get_ua())
-
-        # request.meta["proxy"] = "http://119.101.116.182:9999"
-
-
-class RandomProxyMiddleware(object):
-    # 动态设置IP代理
-    def process_request(self, request, spider):  # 处理request的函数
-        get_ip = GetIP()
-        request.meta["proxy"] = get_ip.get_random_ip()
-
-
-from selenium import webdriver
-from scrapy.http import HtmlResponse
-
-class JSPageMiddleware(object):
-    # 通过Firefox请求动态网页
-
-    def process_request(self, request, spider):
-        if spider.name == "jobbole":
-            #browser = webdriver.Firefox(executable_path="E:\\geckodriver.exe")
-            spider.browser.get(request.url)
-            import time
-            time.sleep(3)
-            print("访问:{0}".format(request.url))
-
-            return HtmlResponse(url=spider.browser.current_url, body=spider.browser.page_source, encoding="utf-8",request=request)

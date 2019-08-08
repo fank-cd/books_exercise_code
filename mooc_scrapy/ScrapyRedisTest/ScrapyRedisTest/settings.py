@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-import os
-# Scrapy settings for ArtileSpider project
+
+# Scrapy settings for ScrapyRedisTest project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,22 @@ import os
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'ArtileSpider'
+BOT_NAME = 'ScrapyRedisTest'
 
-SPIDER_MODULES = ['ArtileSpider.spiders']
-NEWSPIDER_MODULE = 'ArtileSpider.spiders'
+SPIDER_MODULES = ['ScrapyRedisTest.spiders']
+NEWSPIDER_MODULE = 'ScrapyRedisTest.spiders'
+# Enables scheduling storing requests queue in redis.
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 
+# Ensure all spiders share same duplicates filter through redis.
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+ITEM_PIPELINES = {
+    'scrapy_redis.pipelines.RedisPipeline': 300
+}
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'ArtileSpider (+http://www.yourdomain.com)'
+#USER_AGENT = 'ScrapyRedisTest (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -27,15 +35,13 @@ ROBOTSTXT_OBEY = False
 # Configure a delay for requests for the same website (default: 0)
 # See https://doc.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-# 下载延迟限速 3即为3秒
-DOWNLOAD_DELAY = 3
+#DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-# 禁用cookie可以防止被识别
-COOKIES_ENABLED = False
+#COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 #TELNETCONSOLE_ENABLED = False
@@ -49,18 +55,14 @@ COOKIES_ENABLED = False
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'ArtileSpider.middlewares.ArtilespiderSpiderMiddleware': 543,
+#    'ScrapyRedisTest.middlewares.ScrapyredistestSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-# DOWNLOADER_MIDDLEWARES = {
-#     # 数字优先级
-#     #'ArtileSpider.middlewares.RandomUserAgentMiddleware': 543,
-#     "ArtileSpider.middlewares.JSPageMiddleware": 1,
-#     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
-#    # 'ArtileSpider.middlewares.ArtilespiderDownloaderMiddleware': 543,
-# }
+#DOWNLOADER_MIDDLEWARES = {
+#    'ScrapyRedisTest.middlewares.ScrapyredistestDownloaderMiddleware': 543,
+#}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -70,28 +72,11 @@ COOKIES_ENABLED = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
+#ITEM_PIPELINES = {
+#    'ScrapyRedisTest.pipelines.ScrapyredistestPipeline': 300,
+#}
 
-ITEM_PIPELINES = {
-    # 'ArtileSpider.pipelines.JsonExporterPipleline': 2,
-    # 'scrapy.pipelines.images.ImagesPipeline': 300,
-    # 'ArtileSpider.pipelines.ArticleImagePipeline': 1,
-    # 'ArtileSpider.pipelines.MysqlPipeline': 1,
-    'ArtileSpider.pipelines.MysqlTwistedPipline': 1,
-
-
-}
-# 数字为优先级
-
-
-IMAGES_URLS_FIELD = "front_image_url"
-project_dir = os.path.abspath(os.path.dirname(__file__))
-
-IMAGES_STORE = os.path.join(project_dir, "images")
-
-# IMAGES_MIN_HEIGHT = 100
-# IAMGES_MIN_WIDTH = 100
-
-# Enable and configure the  ttle extension (disabled by default)
+# Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
 # The initial download delay
@@ -111,24 +96,3 @@ IMAGES_STORE = os.path.join(project_dir, "images")
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
-MYSQL_HOST = "127.0.0.1"
-MYSQL_DBNAME = "article_spider"
-MYSQL_USER = "root"
-MYSQL_PASSWORD = "1234"
-
-
-SQL_DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
-SQL_DATE_FORMAT = "%Y-%m-%d"
-
-RANDOM_UA_TYPE = "random"
-
-"""
-user_agent_list = [
-    "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11",
-
-]
-
-#  USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0"
-
-"""
