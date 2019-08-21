@@ -1,6 +1,6 @@
 """
 找出数组中重复的数字
-在一个长度为N的数组里的所有数字都在0-n-1的范围内。数组中某些数字是重复的，
+在一个长度为N的数组里的所有数字都在0~N-1的范围内。数组中某些数字是重复的，
 但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个
 重复的数字。例如，如果输入长度为7的数组[2,3,1,0,2,5,3]，那么对应的输出
 是重复的数字2或者3
@@ -40,9 +40,9 @@ def findDuplicate(nums):
             if nums[i] == nums[nums[i]]:
                 return nums[i]
             # nums[i], nums[nums[i]] = nums[nums[i]],nums[i]
+            # 顺序不同会影响结果，需要注意
             nums[nums[i]], nums[i] = nums[i], nums[nums[i]]
     return False
-
 
 
 if __name__ == "__main__":
