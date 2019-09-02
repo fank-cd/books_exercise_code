@@ -1,7 +1,8 @@
 # coding:utf-8
 
 # 二分要求列表有序，返回的是元素的索引
-# 二分查找是不断查找中间位置的值和要查找的值做比较，不断调整猜测地范围来调整中间值
+# 二分查找是不断查找中间位置的值和要查找的值做比较，
+# 不断调整猜测地范围来调整中间值
 # 复杂度 O(logn)
 
 def binary_search(list, item):
@@ -22,5 +23,5 @@ def binary_search(list, item):
     return None
 
 
-print binary_search([1,2,3,8,9,10],2)
+print (binary_search([1,2,3,8,9,10],2))
 

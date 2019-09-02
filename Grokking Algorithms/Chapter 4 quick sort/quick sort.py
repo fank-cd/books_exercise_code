@@ -3,6 +3,9 @@
 # 基准值的选择非常影响快排的效率
 
 def quicksort(array):
+    if not isinstance(array,list):
+        return None
+        
     if len(array) < 2:
         return array
 
@@ -14,4 +17,4 @@ def quicksort(array):
         return quicksort(less) + [pivot] + quicksort(greater)
 
 
-print quicksort([10, 5, 2, 3])
+print (quicksort([10, 5, 2, 3]))
