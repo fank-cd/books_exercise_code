@@ -10,13 +10,42 @@ fn = 1  n=1
 
 # 递归写法：
 # 这种写法很慢，很慢，会有一些重复的计算过程。而且还容易造成栈溢出
-def fib(num):
-    if not isinstance(num,int):
-        return None
-    if num<=0:
-        return 0
-    if num == 1:
-        return 1
+# def fib(num):
+#     if not isinstance(num,int):
+#         return None
+#     if num<=0:
+#         return 0
+#     if num == 1:
+#         return 1
     
-    return fib(num-1) + fib(num-2)
+#     return fib(num-1) + fib(num-2)
 
+# 递推法：时间复杂度是O(n),数据量如果巨大，会越来越慢
+# def fib(n):
+#     a,b = 0 ,1
+
+#     for _ in range(n+1):
+#         a,b = b, a+b
+#     return a
+
+# 生成器
+# 带有yield的函数都被看成生成器，生成器是可迭代对象，
+# 且具备__iter__ 和 __next__方法， 可以遍历获取元素
+# python要求迭代器本身也是可迭代的，所以我们还要为迭代器实现__iter__方法，
+# 而__iter__方法要返回一个迭代器，迭代器自身正是一个迭代器，
+# 所以迭代器的__iter__方法返回自身即可
+
+def fib(max):
+    a, b = 0, 1
+    while max > 0:
+        a, b = b, a + b
+        max -= 1
+        yield a
+
+
+# 青蛙跳台阶问题。
+# 一只青蛙一次可以跳上一级台阶，也可以跳上两级台阶。
+# 求该青蛙跳上一个n级的台阶总共有多少种跳法
+
+# 这种题目本质是和斐波那契一样的。。需要动下脑子
+# 还需要画个2xN的格子，这样看起来很清楚（不对，其实就是有题目就是格子的）
