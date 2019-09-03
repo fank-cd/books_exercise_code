@@ -38,7 +38,7 @@ print(max_solution(8))
 # 段。另外，当n大于等于5时候，3(n-3)>=2(n-2)。所以我们应该尽可能地多
 # 剪长度位3的绳子段。
 
- def max_product_after_cuting2(length):
+def max_product_after_cuting2(length):
     """
     贪婪法
     时间 O(1)，空间O(1)
