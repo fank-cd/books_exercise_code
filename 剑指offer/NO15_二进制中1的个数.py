@@ -52,7 +52,7 @@
 def numberof1(n):
     count = 0
     flag =  1
-    for i in range(len(bin(n)[2:])):
+    for _ in range(len(bin(n)[2:])):
         if n & flag:  #判断低位是不是为1
             count +=1
         flag = flag << 1 # 左移
