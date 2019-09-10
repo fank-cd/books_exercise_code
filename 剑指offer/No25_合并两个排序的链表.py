@@ -29,7 +29,7 @@ def merge_list(l1, l2):
 
     l = None
     head = l
-    while l1 is not None and l2 is not None:
+    while l1 is not None and l2 is not None:  # 两个链表都存在的情况
         if l1.value < l2.value:
             candidate_node = l1
             l1 = l1.next
@@ -37,7 +37,7 @@ def merge_list(l1, l2):
             candidate_node = l2
             l2 = l2.next
 
-        if l is None:
+        if l is None:  # 头结点，初始化链表
             l = candidate_node
             l.next = None
             head = l
