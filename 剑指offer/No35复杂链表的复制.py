@@ -8,6 +8,11 @@
 #     ComplexListNode*    m_pSibing;
 # }
 
+# 这个思想很有意思，普通的想法最多就是来个字典做一个映射关系
+# 这个是先组成A->A`->B->B` 的样子
+# 然后再设置他们的sibing链
+# 最后再将两个链表分开，就得到了了复制后的复杂链表，
+# 厉害的不行
 class ComplexNode(object):
     def __init__(self, value, next=None, sibling=None):
         self.value = value
