@@ -57,26 +57,27 @@ def numberof1(n):
     for _ in range(len(bin(n)[2:])):
         if n & flag:  #判断低位是不是为1
             count +=1
-        flag = flag << 1 # 左移
+        flag = flag << 1 # 左移 1的位置不断向左移动
     return count
 
 print(numberof1(9))
 
 
 # 牛逼算法
-# 如果我们把一个数减去1。如果这个证书不等于0，那么该整数的二进制表示中至少有一位是1。
+# 如果我们把一个数减去1。如果这个整数不等于0，那么该整数的二进制表示中至少有一位是1。
 # 先假设最右边一位是1，减1后，最后一位变成0，而其他所有位保持不变。
 # 如果最后一位不是1而是0。如果该整数的二进制表示中最右边的1位于第m位，那么减去1时
 # 第m位由1变成0，而第m位之后所有0变成1，整数中第m位之前的所有位数都保持不变。
 # 接下来我们把一个整数和它减去1的结果做位与运算。相当于把它最右边的1变成0
 
-def count_one(x):
+# 人话：就是不断把最右为变成0，然后不断+1。
+def count_one(n):
     count = 0
-    while x:
+    while n:
         count += 1
-        x = x & (x - 1)
+        n = n & (n - 1)
     return count
 
 
 if __name__ == "__main__":
-    print(count_one(x=10))
+    print(count_one(n=10))
