@@ -35,4 +35,14 @@ a = [
     {"x": 2, "y": 4},
 ]
 
-print(list(dequpe(a,key=lambda d: (d['x'],d['y']))))
+
+print(list(dequpe(a,key=lambda d: (d['x'],d['y'])))) # 将元素变为了元组，元组不可变可哈希
+
+a = [
+    {"x": 1, "y": 1},
+    {"x": 1, "y": 3},
+    {"x": 1, "y": 2},
+    {"x": 2, "y": 4},
+]
+
+print(list(dequpe(a,key=lambda d: (d['x']))))
