@@ -27,7 +27,6 @@ def dequpe(items, key=None):
             yield item
             seen.add(val)
 
-
 a = [
     {"x": 1, "y": 1},
     {"x": 1, "y": 3},
