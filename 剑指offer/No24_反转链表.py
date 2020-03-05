@@ -15,6 +15,7 @@ class Node(object):
         self.value = value
         self.next = next
 
+
 def reverse_link_list(head):
     if head is None:
         return
@@ -27,3 +28,18 @@ def reverse_link_list(head):
         pre = cur
         cur = next
     return pre
+
+
+class ListNode(object):
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+# 巧妙利用python的多元赋值
+# 多元赋值的时候，右边的值不会随着赋值而改变
+def reverseList(head):
+    p, rev = head, None
+    while p:
+        rev, rev.next, p = p, rev, p.next
+    return rev
