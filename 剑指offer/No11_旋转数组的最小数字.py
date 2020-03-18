@@ -92,3 +92,28 @@ def Min(numbers,length):
 
 
 print(Min([3,4,5,1,2],5))
+
+"""
+这段代码思路更清晰，同样使用二分法。
+numbers[mid]和numbers[high] 比较，如果numbers[mid]更大，那么mid是在左侧递增的序列上
+所以答案的值是在 [mid,high]的左右闭区间内，所以 low = mid+1
+
+反之更小，则在右侧递增序列上，那么区间是[low,mid]之间，所以high = mid
+而相等的时候，high = high -1
+而low = high 的时候，返回numbers[low]就ok了
+"""
+
+class Solution:
+    def minArray(self, numbers: List[int]) -> int:
+        low,high = 0,len(numbers)-1
+
+        while low<high:
+            mid = (low+high) //2
+            if numbers[mid] > numbers[high]:
+                low = mid + 1 
+            elif numbers[mid] < numbers[high]:
+                high = mid
+            else:
+                high = high -1
+        return numbers[low]
+

@@ -11,3 +11,8 @@ gen
 
 *.py[cod]
 *$py.class
+.vscode
+..vscode
+.vscode/*
+/.vscode
+.vscode/*
