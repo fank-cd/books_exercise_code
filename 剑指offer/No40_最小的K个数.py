@@ -11,6 +11,27 @@
 # 如果基于数组的第k个数字来调整，则使得比第k个数字小的所有数字都
 # 位于数组的左边，比第k个数字大的所有数字都位于数组的右边。
 
+# 思路3：直接堆排序，return heapq.nsmalest(arr,k) 这样可以
+# 刚刚那样的问题在于，python是最小堆，所以需要把全部元素都堆排序，并且修改原来的数组
+# 我们可以将元素变为负数，比较的时候再负负得正，这样可以实现一个最大堆
+# 再去比较剩下的元素，如果比堆顶的元素小，则弹出再push
+#
+#  代码如下
+
+# def getLeastNumbers(self, arr: List[int], k: int) -> List[int]:
+#     if k == 0:
+#         return list()
+
+#     hp = [-x for x in arr[:k]]
+#     heapq.heapify(hp)
+#     for i in range(k, len(arr)):
+#         if -hp[0] > arr[i]:
+#             # heapq.heappop(hp)
+#             # heapq.heappush(hp, -arr[i])
+#             heapq.heapreplace(hp,-arr[i]) # 这样比弹出再pushpush更快
+#     ans = [-x for x in hp]
+#     return ans
+
 import random
 
 
