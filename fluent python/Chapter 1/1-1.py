@@ -20,11 +20,11 @@ class FrenchDeck(object):
 
 
 beer_card = Card("7", "diamonds")
-print beer_card
+print (beer_card)
 
 deck = FrenchDeck()
-print len(deck)  # 因为我们写了__len__方法，所以才能直接调用len
+print (len(deck))  # 因为我们写了__len__方法，所以才能直接调用len
 
-print deck[0]
-print deck[-1]
+print (deck[0])
+print (deck[-1])
 #  由于写了__getitem__方法，所以可以直接实现。因为实现了__getitem__方法，所以迭代也是可行的

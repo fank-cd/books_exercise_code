@@ -1,6 +1,7 @@
 # coding:utf-8
 
 # 基准值的选择非常影响快排的效率
+# 快排最好的情况是，每次正好中分，复杂度为O(nlogn)。最差情况，复杂度为O(n^2)，退化成冒泡排序
 
 def quicksort(array):
     if not isinstance(array,list):
