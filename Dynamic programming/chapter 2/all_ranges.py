@@ -1,10 +1,14 @@
 # 全排列问题
 # 回溯法
 
-data_list = [1,2,3]
+data_list = [1, 2, 3]
 arrages = []
-def search(depth,datas):
-    if depth == len(data_list) +1:
+
+
+def search(depth, datas):
+    if depth == len(data_list) +1 :
+        # arrages.append(datas.pop(0))
+        
         print(arrages)
 
     else:
@@ -14,9 +18,10 @@ def search(depth,datas):
             # 2、递归
             next_datas = datas[:]
             next_datas.remove(data)
-            search(depth+1,next_datas)
+            search(depth+1, next_datas)
             # 3、恢复现场
             arrages.pop()
 
+
 if __name__ == "__main__":
-    search(1,data_list)
+    search(1, data_list)
