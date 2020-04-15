@@ -14,11 +14,10 @@ class A:
         
 class B(A):
     
-    def __init__():
         
     def spam(self):
         print("B.spam")
-        super().spam()
+        super().spam() 
 
 if __name__ == '__main__':
     b = B()
