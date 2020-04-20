@@ -65,6 +65,7 @@ def find_next_node_in_inordered1(node):
                 if id(parent) == id(parent.parent.left_child):
                     return parent.parent
                 parent = parent.parent
+        # 不会出现父节点是祖先节点的右节点，理由是如果是这样，那么node就是最右的节点，在中序遍历中是不会存在下一个节点的
     return None
 
 
