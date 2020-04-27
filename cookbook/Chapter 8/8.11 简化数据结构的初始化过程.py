@@ -28,4 +28,4 @@ if __name__ == '__main__':
     s = Stock("ACME", "14",price=22)
 
 
-# 这样就不必写一个Stock类就写一个init 写一个Point类又写一个init
+# 这样就不必写一个Stock类就写一个init 写一个Point类又写一个init 
