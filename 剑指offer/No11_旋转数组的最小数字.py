@@ -15,7 +15,8 @@
 # coding:utf-8
 
 # 基准值的选择非常影响快排的效率
-
+# 最理想的情况 O(nlogn)
+# 最坏的情况 O(n2)
 def quicksort(array):
     if not isinstance(array,list):
         return None
@@ -78,7 +79,7 @@ def Min(numbers,length):
             index_mid = index2
             break
         index_mid = (index1+index2) //2
-        # 如果index1、index2、index_mid 指向的三个数字想等。
+        # 如果index1、index2、index_mid 指向的三个数字相等。
         # 则只能顺序查找
         if numbers[index1] == numbers[index2] and numbers[index_mid]== numbers[index1]:
             return min(numbers)
