@@ -21,7 +21,7 @@ class Person:
 # 他们可以根据场景不同来自由变化
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': 
     p = Person("fank")
     print(p.first_name)  # fank
     print(p._first_name)  # fank
